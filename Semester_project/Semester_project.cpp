@@ -26,7 +26,6 @@ int main()
     window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 
 
-    Market market;
     CollisionMap cmap;
     cmap.createNewSize(30);
     LevelMap lmap("./images/tilemap.png", &cmap);
@@ -39,7 +38,7 @@ int main()
     BgMap.setPosition(-688-32, -384-32);
 
     Event event;
-    HUD hud(&car, &window, &event, &market, &cmap);
+    HUD hud(&car, &window, &event, &cmap);
     while (window.isOpen())
     {
         while (window.pollEvent(event))

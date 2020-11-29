@@ -22,7 +22,6 @@ private:
     Font font;
     Text WheatText, CoinsText;
     RectangleShape StatsDiv;
-    Market* market;
     Button* TestButton;
     Button* ExchangeButton;
     Texture FarmImage;
@@ -44,7 +43,7 @@ private:
         }
     }
 public:
-	HUD(VehicleSprite* car, RenderWindow* window, Event* ev, Market* mark, CollisionMap* cmap) : Car(car), Window(window), event(ev), market(mark), Cmap(cmap) {
+	HUD(VehicleSprite* car, RenderWindow* window, Event* ev, CollisionMap* cmap) : Car(car), Window(window), event(ev), Cmap(cmap) {
         Wh = Warehouse::GetInstance();
         Car->setBlock(true);
         Location = 0;
@@ -114,7 +113,7 @@ public:
             for (int i = 0; i < 8; i++) {
                 if ((*FieldsOptionsArray[i]).isPressed()) {
                     int fieldSize = (i + 3) * 10;
-                    if ((*market).buyField(fieldSize)) {
+                    if (Market::buyField(fieldSize)) {
                         (*Cmap).createNewSize(fieldSize);
                         (*Car).respawn();
 
@@ -139,7 +138,7 @@ public:
         }
 
         if ((*ExchangeButton).isPressed()) {
-            (*market).sellWheat();
+            Market::sellWheat();
             (*ExchangeButton).setEventPressed();
         }
         

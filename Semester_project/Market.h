@@ -3,21 +3,16 @@
 
 class Market {
 private:
-	float WheatPrice;
-	Warehouse* Wh;
+	static float WheatPrice;
+	static Warehouse* Wh;
 public:
-	Market() {
-		Wh = Warehouse::GetInstance();
-		WheatPrice = 0.5;
-	}
-
-	void setWheatPrice(float wheatPrice) {
+	static void setWheatPrice(float wheatPrice) {
 		WheatPrice = wheatPrice;
 	}
 
-	float getWheatPrice() { return WheatPrice; }
+	static float getWheatPrice() { return WheatPrice; }
 
-	bool buyWheat(float kilos) {
+	static bool buyWheat(float kilos) {
 		float resultPrice = kilos * WheatPrice;
 		if (Wh->getCoins() >= resultPrice) {
 			float whResultCoins = Wh->getCoins();
@@ -29,7 +24,7 @@ public:
 		}
 	}
 
-	bool buyField(int size) {
+	static bool buyField(int size) {
 		float price = size * 10;
 		if (price <= Wh->getCoins()) {
 			float resultCoins = (Wh->getCoins()) - price;
@@ -39,11 +34,12 @@ public:
 		else return false;
 	}
 
-	void sellWheat() {
+	static void sellWheat() {
 		float resultCoins = (Wh->getWheat() * WheatPrice) + Wh->getCoins();
 		Wh->setWheat(0);
 		Wh->setCoins(resultCoins);
 	}
-
-	~Market() {}
 };
+
+float Market::WheatPrice = 0.5;
+Warehouse* Market::Wh = Warehouse::GetInstance();
