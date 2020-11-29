@@ -4,10 +4,17 @@ class Warehouse {
 private:
 	float Coins;
 	float Wheat;
-public:
 	Warehouse() {
 		this->Coins = 0;
 		this->Wheat = 0;
+	}
+	static Warehouse* warehouse_;
+public:
+	static Warehouse* GetInstance() {
+		if (warehouse_ == nullptr) {
+			warehouse_ = new Warehouse();
+		}
+		return warehouse_;
 	}
 
 	void setCoins(float coins) {
@@ -32,3 +39,5 @@ public:
 
 	~Warehouse() {}
 };
+
+Warehouse* Warehouse::warehouse_ = nullptr;

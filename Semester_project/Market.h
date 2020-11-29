@@ -6,7 +6,8 @@ private:
 	float WheatPrice;
 	Warehouse* Wh;
 public:
-	Market(Warehouse* wh) : Wh(wh) {
+	Market() {
+		Wh = Warehouse::GetInstance();
 		WheatPrice = 0.5;
 	}
 

@@ -44,7 +44,8 @@ private:
         }
     }
 public:
-	HUD(Warehouse* wh, VehicleSprite* car, RenderWindow* window, Event* ev, Market* mark, CollisionMap* cmap) : Wh(wh), Car(car), Window(window), event(ev), market(mark), Cmap(cmap) {
+	HUD(VehicleSprite* car, RenderWindow* window, Event* ev, Market* mark, CollisionMap* cmap) : Car(car), Window(window), event(ev), market(mark), Cmap(cmap) {
+        Wh = Warehouse::GetInstance();
         Car->setBlock(true);
         Location = 0;
         font.loadFromFile("./images/Templeton_Clean.ttf");

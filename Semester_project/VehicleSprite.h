@@ -56,14 +56,15 @@ protected:
         return v;
     }
 public:
-    VehicleSprite(float speed, string texturePath, CollisionMap* collmap, Warehouse* wh) : Speed(speed), collMap(collmap), Wh(wh) {
-        Block = false;
+    VehicleSprite(float speed, string texturePath, CollisionMap* collmap) : Speed(speed), collMap(collmap) {
+        this->Wh = Warehouse::GetInstance();
+        this->Block = false;
         Texture texture;
         if (!texture.loadFromFile(texturePath)) {
             cout << "[!] Can't open VehicleSprite texture (" << texturePath << ")\n";
         }
         texture.setSmooth(true);
-        Skin = texture;
+        this->Skin = texture;
         setTexture(Skin);
         setOrigin(Skin.getSize().x / 2, Skin.getSize().y * 0.8);
         //setPosition(200, 200);

@@ -8,7 +8,6 @@
 #include "CollisionMap.h"
 #include "LevelMap.h"
 #include "Market.h"
-#include "Warehouse.h"
 #include "HUD.h"
 
 #define _WIN32_WINNT 0x0500
@@ -16,25 +15,6 @@
 
 using namespace sf;
 using namespace std;
-
-bool intersect(CircleShape cell, Vector2f shape) {
-    int xFrom = cell.getPosition().x - cell.getRadius();
-    int xTo = cell.getPosition().x + cell.getRadius();
-    int yFrom = cell.getPosition().y - cell.getRadius();
-    int yTo = cell.getPosition().y + cell.getRadius();
-    int x = shape.x;
-    int y = shape.y;
-    if ((x >= xFrom && x <= xTo) && (y >= yFrom && y <= yTo)) return true;
-    else return false;
-}
-
-sf::Vector2f inverseVec(sf::Vector2f v) {
-    v.x *= -1;
-    v.y *= -1;
-    return v;
-}
-
-
 
 int main()
 {
@@ -44,12 +24,13 @@ int main()
     ShowWindow(hWnd, SW_HIDE);
     RenderWindow window(VideoMode(1376, 768), "Farm Simulator", sf::Style::Titlebar | sf::Style::Close);
     window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
-    Warehouse warehouse;
-    Market market(&warehouse);
+
+
+    Market market;
     CollisionMap cmap;
     cmap.createNewSize(30);
     LevelMap lmap("./images/tilemap.png", &cmap);
-    VehicleSprite car(3.5f, "./images/resized.png", &cmap, &warehouse);
+    VehicleSprite car(3.5f, "./images/resized.png", &cmap);
     View view(car.getPosition(), Vector2f(1376.f, 768.f));
 
     CollisionMap cBgMap;
@@ -58,7 +39,7 @@ int main()
     BgMap.setPosition(-688-32, -384-32);
 
     Event event;
-    HUD hud(&warehouse, &car, &window, &event, &market, &cmap);
+    HUD hud(&car, &window, &event, &market, &cmap);
     while (window.isOpen())
     {
         while (window.pollEvent(event))

@@ -28,6 +28,7 @@ private:
 public:
 
 	Button(string textOrPath, Color col, Event* ev, RenderWindow* window) : color(col), TextOrPath(textOrPath), event(ev), Window(window) {
+
 		if (TextOrPath[0] == '.') {
 			texture.loadFromFile(TextOrPath);
 			InnerIcon.setTexture(texture);
