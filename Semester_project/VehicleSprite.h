@@ -11,9 +11,9 @@ using namespace std;
 class VehicleSprite : public Sprite {
 private:
     bool Block;
+    Vector2f Direction;
     float Speed;
     Texture Skin;
-    Vector2f Direction;
     CollisionMap* collMap;
     Warehouse* Wh;
 protected:
@@ -104,9 +104,14 @@ public:
             for (int j = jMin - 1; j <= jMax - 1; j++) {
                 if (collMap->getElem(i, j) == 3) {
                     move(inverseVec(getDirections()));
+                    
 
-                    if (Keyboard::isKeyPressed(Keyboard::D) && Keyboard::isKeyPressed(Keyboard::S)) rorateRight();
-                    if (Keyboard::isKeyPressed(Keyboard::A) && Keyboard::isKeyPressed(Keyboard::S)) rorateLeft();
+                    if (Keyboard::isKeyPressed(Keyboard::D) && Keyboard::isKeyPressed(Keyboard::S)) {
+                        rorateRight();
+                    }
+                    if (Keyboard::isKeyPressed(Keyboard::A) && Keyboard::isKeyPressed(Keyboard::S)) {
+                        rorateLeft();
+                    }
                 }
                 else if (collMap->getElem(i,j) == 2) {
                     collMap->updateElem(i, j, 0);
@@ -144,7 +149,7 @@ public:
 
     void respawn() {
         setRotation(0);
-        setPosition(32 + 32, (*collMap).getCols() * 32 - 32 - 32);
+        setPosition(32 + 48, (*collMap).getCols() * 32 - 32 - 48);
     }
 
 };

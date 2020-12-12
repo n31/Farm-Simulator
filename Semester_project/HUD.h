@@ -7,6 +7,7 @@
 #include "Market.h"
 #include <iostream>
 #include "CollisionMap.h"
+#include <SFML/Audio.hpp>
 
 using namespace std;
 using namespace sf;
@@ -29,6 +30,7 @@ private:
     Button* bg;
 
     Button** FieldsOptionsArray;
+    Music mTheme;
 
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const
     {
@@ -44,6 +46,8 @@ private:
     }
 public:
 	HUD(VehicleSprite* car, RenderWindow* window, Event* ev, CollisionMap* cmap) : Car(car), Window(window), event(ev), Cmap(cmap) {
+        mTheme.openFromFile("./images/music.ogg");
+        mTheme.setLoop(true);
         Wh = Warehouse::GetInstance();
         Car->setBlock(true);
         Location = 0;
@@ -55,6 +59,7 @@ public:
         //StatsDiv = RectangleShape(Vector2f(1376, 768));
         //StatsDiv.setFillColor(Color::Blue);
 
+        
         FarmImage.loadFromFile("./images/farm.jpg");
         FarmBackground.setTexture(FarmImage);
         FarmBackground.setScale(0.2, 0.2);
@@ -103,6 +108,7 @@ public:
 
         // check the Location
         if (Location == 0) {
+            mTheme.pause();
             (*ExchangeButton).unhide();
             (*bg).unhide();
             (*TestButton).replaceIcon("./images/grain_icon.png");
@@ -123,6 +129,8 @@ public:
             }
         }
         else if (Location == 1) {
+            if (mTheme.getStatus() != sf::Music::Status::Playing)
+                mTheme.play();
             (*ExchangeButton).hide();
             (*bg).hide();
             (*TestButton).replaceIcon("./images/window_icon.png");

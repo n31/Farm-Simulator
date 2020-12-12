@@ -26,6 +26,9 @@ int main()
     window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 
 
+    
+
+
     CollisionMap cmap;
     cmap.createNewSize(30);
     LevelMap lmap("./images/tilemap.png", &cmap);
