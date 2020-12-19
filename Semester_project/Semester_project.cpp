@@ -25,10 +25,6 @@ int main()
     RenderWindow window(VideoMode(1376, 768), "Farm Simulator", sf::Style::Titlebar | sf::Style::Close);
     window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 
-
-    
-
-
     CollisionMap cmap;
     cmap.createNewSize(30);
     LevelMap lmap("./images/tilemap.png", &cmap);

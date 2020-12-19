@@ -56,8 +56,6 @@ public:
         CoinsText = Text(to_string(Wh->getCoins()), font, 30);
         StatsDiv = RectangleShape(Vector2f(200, 100));
         StatsDiv.setFillColor(Color::Blue);
-        //StatsDiv = RectangleShape(Vector2f(1376, 768));
-        //StatsDiv.setFillColor(Color::Blue);
 
         
         FarmImage.loadFromFile("./images/farm.jpg");
@@ -66,7 +64,6 @@ public:
 
 
         bg = new Button("./images/farm.jpg", Color::Transparent, event, window);
-        //(*bg).setScale(0.2, 0.2);
 
         TestButton = new Button("./images/window_icon.png", Color::Transparent, event, window);
         ExchangeButton = new Button("./images/exchange.png", Color::Green, event, window);

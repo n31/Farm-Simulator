@@ -56,16 +56,4 @@ public:
 		MapArray = lvl;
 		Nstb = Nstr = size;
 	}
-
-	/*void loadFromFile(string path) {
-		ifstream fin(path);
-		int str, stb;
-		fin >> str >> stb;
-		int size = str * stb;
-		for (int i = 0; i < size; i++) {
-			int x;
-			fin >> x;
-			MapArray.push_back(x);
-		}
-	}*/
 };
